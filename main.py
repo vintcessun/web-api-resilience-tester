@@ -82,38 +82,116 @@ def generate_account(data_type):
 
 
 def generate_password():
-    """按比例随机生成高仿真密码"""
+    """按比例随机生成极高仿真的复杂密码"""
     rand = random.random()
 
-    # 1. 常用弱口令 (20%)
-    if rand < 0.2:
+    # 1. 常用弱口令 (10%)
+    if rand < 0.10:
         return random.choice(
-            ["123456789", "666888", "admin123", "password", "88888888", "123456ab"]
+            [
+                "123456789",
+                "666888",
+                "admin123",
+                "password",
+                "88888888",
+                "123456ab",
+                "11223344",
+                "000000",
+            ]
         )
 
-    # 2. 姓名拼音组合 (30%)
-    elif rand < 0.5:
-        names = ["zhangwei", "lihua", "wang", "chen", "yang", "zhao", "zhou"]
-        suffix = random.choice(["1990", "520", "123", ".123", "666", "888"])
-        return random.choice(names) + suffix
+    # 2. 姓名/拼音/英文 + 数字/符号 (25%)
+    elif rand < 0.35:
+        prefixes = [
+            "zhang",
+            "li",
+            "wang",
+            "chen",
+            "liu",
+            "love",
+            "smile",
+            "lucky",
+            "hello",
+            "china",
+            "iphone",
+            "wechat",
+        ]
+        if random.random() > 0.5:
+            prefixes = [p.capitalize() for p in prefixes]
+        suffix = random.choice(
+            ["1990", "520", "123", "666", "888", "2024", "1314", "123456", "!@#"]
+        )
+        return random.choice(prefixes) + suffix
 
-    # 3. 手机号/生日 (30%)
-    elif rand < 0.8:
-        if random.choice([True, False]):
-            # 模拟11位数字
+    # 3. 姓名缩写 + 日期 (20%)
+    elif rand < 0.55:
+        initials = [
+            "zw",
+            "lh",
+            "wf",
+            "cy",
+            "lj",
+            "zs",
+            "xm",
+            "wy",
+            "qj",
+            "ht",
+            "ly",
+            "xx",
+            "abc",
+            "xyz",
+            "test",
+            "user",
+            "admin",
+            "guest",
+            "root",
+            "sys",
+            "data",
+            "info",
+            "wds",
+            "wys",
+            "wd",
+            "wzxh",
+            "wys",
+            "wdsj",
+            "wds123",
+        ]
+        year = str(random.randint(1985, 2005))
+        md = str(random.randint(1, 12)).zfill(2) + str(random.randint(1, 28)).zfill(2)
+        return random.choice(initials) + random.choice([year, md])
+
+    # 4. 手机号/生日 (20%)
+    elif rand < 0.75:
+        if random.random() > 0.5:
+            # 模拟11位手机号
             return "1" + "".join(random.choices(string.digits, k=10))
         else:
-            # 模拟20000101格式
+            # 模拟19901001格式生日
             year = str(random.randint(1980, 2010))
             month = str(random.randint(1, 12)).zfill(2)
             day = str(random.randint(1, 28)).zfill(2)
             return year + month + day
 
-    # 4. 键盘序列 (20%)
-    else:
+    # 5. 键盘序列/纯字符 (15%)
+    elif rand < 0.90:
         return random.choice(
-            ["asdfghjkl", "qwerty123", "zxcvbnm", "1q2w3e4r", "p0o9i8u7"]
+            [
+                "asdfghjkl",
+                "qwerty123",
+                "zxcvbnm",
+                "1q2w3e4r",
+                "p0o9i8u7",
+                "qwaszx",
+                "yuiop789",
+            ]
         )
+
+    # 6. 混合复杂模式 (10%) - 提高后台可信度
+    else:
+        prefix = "".join(random.choices(string.ascii_letters, k=random.randint(2, 4)))
+        mid = random.choice(["@", ".", "_", ""])
+        num = "".join(random.choices(string.digits, k=random.randint(3, 6)))
+        return prefix + mid + num
 
 
 async def send_poison_request(client, data_type):
