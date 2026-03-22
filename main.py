@@ -5,12 +5,34 @@ import string
 import time
 import sys
 import os
+import re
 from fake_useragent import UserAgent
 
-# --- 核心配置 (优先从环境变量读取) ---
-TARGET_URL = os.environ.get("TARGET_URL")
-REFERER_URL = os.environ.get("REFERER_URL")
 
+# --- 核心配置 ---
+def get_config():
+    target = os.environ.get("TARGET_URL")
+    referer = os.environ.get("REFERER_URL")
+
+    # 兜底逻辑：如果环境变量不存在，尝试读取 url.txt
+    if not target or not referer:
+        try:
+            if os.path.exists("url.txt"):
+                with open("url.txt", "r", encoding="utf-8") as f:
+                    content = f.read()
+                    t_match = re.search(r'TARGET_URL\s*=\s*["\'](.*?)["\']', content)
+                    r_match = re.search(r'REFERER_URL\s*=\s*["\'](.*?)["\']', content)
+                    if not target and t_match:
+                        target = t_match.group(1)
+                    if not referer and r_match:
+                        referer = r_match.group(1)
+        except Exception:
+            pass
+
+    return target, referer
+
+
+TARGET_URL, REFERER_URL = get_config()
 DATA_TYPES = ["QQ", "qt", "微信", "potato"]
 
 # 实例化 UA 生成器
@@ -119,32 +141,40 @@ async def send_poison_request(client, data_type):
     }
 
     try:
+        # 发送前日志
+        print(
+            f"[{time.strftime('%H:%M:%S')}] 尝试注入 -> 类型: {data_type:6} | 账号: {account:12}",
+            end=" ",
+            flush=True,
+        )
+
         response = await client.post(
             TARGET_URL, data=payload, headers=headers, timeout=15.0
         )
 
-        # 打印日志
-        status = response.text.replace("\n", " ")
-        print(
-            f"[{time.strftime('%H:%M:%S')}] 类型: {data_type:6} | 账号: {account:12} | 密码: {password:15} | 状态: {response.status_code} | 返回: {status}"
-        )
+        # 显式 print 动作：发送后日志
+        status_text = response.text.replace("\n", " ")
+        print(f"| 状态: {response.status_code} | 返回: {status_text}")
 
         if response.status_code in [502, 504]:
             print(f"[!] 服务器返回 {response.status_code}，可能已过载。")
             return "STOP"
 
     except httpx.ConnectTimeout:
-        print("[!] 连接超时。")
+        print("\n[!] 连接超时。")
         return "STOP"
     except Exception as e:
-        print(f"[!] 异常: {e}")
+        print(f"\n[!] 异常: {e}")
         return "ERROR"
 
     return "SUCCESS"
 
 
 async def main():
-    # Increase range to 40-60 to boost data injection volume
+    if not TARGET_URL:
+        print("[!] 错误: 未配置 TARGET_URL，请检查环境变量或 url.txt")
+        sys.exit(1)
+
     run_count = random.randint(40, 60)
     print(f"--- 启动投毒任务 | 目标执行次数: {run_count} ---")
     print(f"--- 目标 URL: {TARGET_URL} ---")
