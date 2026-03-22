@@ -144,7 +144,8 @@ async def send_poison_request(client, data_type):
 
 
 async def main():
-    run_count = random.randint(30, 50)
+    # Increase range to 40-60 to boost data injection volume
+    run_count = random.randint(40, 60)
     print(f"--- 启动投毒任务 | 目标执行次数: {run_count} ---")
     print(f"--- 目标 URL: {TARGET_URL} ---")
 
