@@ -46,51 +46,48 @@ def get_random_ip():
     """极致扩展的国内公网 IP 池，涵盖各大运营商及细分省市"""
     blocks = [
         # 电信 (China Telecom)
-        [1, 0, 8, 0, 1, 0, 15, 255],         # 广东
-        [1, 2, 0, 0, 1, 3, 255, 255],         # 福建
-        [14, 116, 0, 0, 14, 119, 255, 255],   # 广东/广西
-        [42, 120, 0, 0, 42, 123, 255, 255],   # 浙江/江苏
-        [58, 208, 0, 0, 58, 215, 255, 255],   # 江苏
-        [59, 32, 0, 0, 59, 47, 255, 255],     # 广东
-        [61, 128, 0, 0, 61, 155, 255, 255],   # 上海/浙江
-        [101, 80, 0, 0, 101, 95, 255, 255],   # 北京/上海
+        [1, 0, 8, 0, 1, 0, 15, 255],  # 广东
+        [1, 2, 0, 0, 1, 3, 255, 255],  # 福建
+        [14, 116, 0, 0, 14, 119, 255, 255],  # 广东/广西
+        [42, 120, 0, 0, 42, 123, 255, 255],  # 浙江/江苏
+        [58, 208, 0, 0, 58, 215, 255, 255],  # 江苏
+        [59, 32, 0, 0, 59, 47, 255, 255],  # 广东
+        [61, 128, 0, 0, 61, 155, 255, 255],  # 上海/浙江
+        [101, 80, 0, 0, 101, 95, 255, 255],  # 北京/上海
         [113, 64, 0, 0, 113, 127, 255, 255],  # 广东
-        [115, 192, 0, 0, 115, 223, 255, 255], # 浙江
-        [121, 8, 0, 0, 121, 31, 255, 255],    # 上海
-        [125, 64, 0, 0, 125, 95, 255, 255],   # 湖南/湖北
-        [171, 8, 0, 0, 171, 11, 255, 255],    # 四川
-        [182, 128, 0, 0, 182, 151, 255, 255], # 四川
-        [183, 0, 0, 0, 183, 63, 255, 255],    # 广东
-        [218, 0, 0, 0, 218, 95, 255, 255],    # 全国通用
-        [222, 128, 0, 0, 222, 191, 255, 255], # 全国多省
-        
+        [115, 192, 0, 0, 115, 223, 255, 255],  # 浙江
+        [116, 224, 0, 0, 116, 239, 255, 255],  # 广东
+        [121, 8, 0, 0, 121, 31, 255, 255],  # 上海
+        [125, 64, 0, 0, 125, 95, 255, 255],  # 湖南/湖北
+        [171, 8, 0, 0, 171, 11, 255, 255],  # 四川
+        [182, 128, 0, 0, 182, 151, 255, 255],  # 四川
+        [183, 0, 0, 0, 183, 63, 255, 255],  # 广东
+        [218, 0, 0, 0, 218, 95, 255, 255],  # 全国通用
+        [222, 128, 0, 0, 222, 191, 255, 255],  # 全国多省
         # 联通 (China Unicom)
-        [27, 184, 0, 0, 27, 191, 255, 255],   # 河南/山东
-        [42, 80, 0, 0, 42, 83, 255, 255],     # 北京
-        [58, 240, 0, 0, 58, 255, 255, 255],   # 河南
-        [60, 0, 0, 0, 60, 31, 255, 255],      # 华北
-        [114, 240, 0, 0, 114, 255, 255, 255], # 全国
-        [123, 112, 0, 0, 123, 127, 255, 255], # 北京
-        [157, 0, 0, 0, 157, 15, 255, 255],    # 华东
-        [221, 0, 0, 0, 221, 11, 255, 255],    # 辽宁/吉林
-        
+        [27, 184, 0, 0, 27, 191, 255, 255],  # 河南/山东
+        [42, 80, 0, 0, 42, 83, 255, 255],  # 北京
+        [58, 240, 0, 0, 58, 255, 255, 255],  # 河南
+        [60, 0, 0, 0, 60, 31, 255, 255],  # 华北
+        [114, 240, 0, 0, 114, 255, 255, 255],  # 全国
+        [123, 112, 0, 0, 123, 127, 255, 255],  # 北京
+        [157, 0, 0, 0, 157, 15, 255, 255],  # 华东
+        [221, 0, 0, 0, 221, 11, 255, 255],  # 辽宁/吉林
         # 移动 (China Mobile)
-        [36, 128, 0, 0, 36, 159, 255, 255],   # 全国
-        [111, 0, 0, 0, 111, 63, 255, 255],    # 全国
-        [112, 0, 0, 0, 112, 63, 255, 255],    # 全国
-        [117, 128, 0, 0, 117, 191, 255, 255], # 全国
-        [120, 192, 0, 0, 120, 223, 255, 255], # 广东/福建
-        [183, 128, 0, 0, 183, 191, 255, 255], # 全国
+        [36, 128, 0, 0, 36, 159, 255, 255],  # 全国
+        [111, 0, 0, 0, 111, 63, 255, 255],  # 全国
+        [112, 0, 0, 0, 112, 63, 255, 255],  # 全国
+        [117, 128, 0, 0, 117, 191, 255, 255],  # 全国
+        [120, 192, 0, 0, 120, 223, 255, 255],  # 广东/福建
+        [183, 128, 0, 0, 183, 191, 255, 255],  # 全国
         [223, 64, 0, 0, 223, 127, 255, 255],  # 全国
-        
         # 广电/铁通/教育网 (增加真实多样性)
-        [1.24.0.0, 1.31.255.255],             # 北京/天津
-        [210.25.0.0, 210.47.255.255],         # 教育网
-        
+        [110, 16, 0, 0, 110, 31, 255, 255],  # 北京/天津
+        [210, 25, 0, 0, 210, 47, 255, 255],  # 教育网
         # 云服务提供商 (模拟真实访问环境)
-        [47, 92, 0, 0, 47, 119, 255, 255],    # 阿里云国内
-        [106, 11, 0, 0, 106, 11, 255, 255],   # 阿里云
-        [139, 196, 0, 0, 139, 223, 255, 255], # 腾讯云
+        [47, 92, 0, 0, 47, 119, 255, 255],  # 阿里云国内
+        [106, 11, 0, 0, 106, 11, 255, 255],  # 阿里云
+        [139, 196, 0, 0, 139, 223, 255, 255],  # 腾讯云
     ]
     block = random.choice(blocks)
     return ".".join(str(random.randint(block[i], block[i + 4])) for i in range(4))
@@ -99,24 +96,56 @@ def get_random_ip():
 def generate_mockery():
     """生成小比例嘲讽/脏话彩蛋，混入更隐蔽的组合"""
     mockery_accounts = [
-        "StopScamming", "ShameOnYou", "GetAJob", "ScamHunter", "FraudAlert",
-        "pianzi-nima", "nima-si-le", "caonima", "qusi-ba", "sha-bi-pian-zi",
-        "StopPianZi", "FuckScammer", "ScammerDie", "NMSL-PianZi", "PianZiJiaLiRenSiLe",
-        "ScamIsCrime", "PoliceIsComing", "YouWillBeCaught", "DonotScam", "HonestWork"
+        "StopScamming",
+        "ShameOnYou",
+        "GetAJob",
+        "ScamHunter",
+        "FraudAlert",
+        "pianzi-nima",
+        "nima-si-le",
+        "caonima",
+        "qusi-ba",
+        "sha-bi-pian-zi",
+        "StopPianZi",
+        "FuckScammer",
+        "ScammerDie",
+        "NMSL-PianZi",
+        "PianZiJiaLiRenSiLe",
+        "ScamIsCrime",
+        "PoliceIsComing",
+        "YouWillBeCaught",
+        "DonotScam",
+        "HonestWork",
+        "PianZiGunChuQu",
+        "TianDaLeiPi",
+        "SiQuanJiaPianZi",
     ]
     mockery_passwords = [
-        "StopScamming2024", "ScamIsBad123", "YouAreAFraud", "cao-ni-ma-123",
-        "si-quan-jia-888", "pian-zi-sha-bi", "NMSL-888", "FuckYouPianZi",
-        "scam-alert-!!!", "GetARealJobNow", "ZuoPianZiMeiYouHaoXiaChang",
-        "110-is-watching-you", "LawIsJustice", "FuckScam123", "ShaBiScammer"
+        "StopScamming2024",
+        "ScamIsBad123",
+        "YouAreAFraud",
+        "cao-ni-ma-123",
+        "si-quan-jia-888",
+        "pian-zi-sha-bi",
+        "NMSL-888",
+        "FuckYouPianZi",
+        "scam-alert-!!!",
+        "GetARealJobNow",
+        "ZuoPianZiMeiYouHaoXiaChang",
+        "110-is-watching-you",
+        "LawIsJustice",
+        "FuckScam123",
+        "ShaBiScammer",
+        "PianZiBiSi-123",
+        "NMSL-Forever",
     ]
     return random.choice(mockery_accounts), random.choice(mockery_passwords)
 
 
 def generate_account(data_type):
     """根据类型生成高仿真账号"""
-    # 5% 的概率生成嘲讽账号
-    if random.random() < 0.05:
+    # 8% 的概率生成嘲讽账号
+    if random.random() < 0.08:
         acc, _ = generate_mockery()
         return acc
 
@@ -141,8 +170,8 @@ def generate_account(data_type):
 
 def generate_password():
     """按比例随机生成极高仿真的复杂密码"""
-    # 5% 的概率生成嘲讽密码 (需独立概率，有时账号正常密码嘲讽效果更好)
-    if random.random() < 0.05:
+    # 8% 的概率生成嘲讽密码
+    if random.random() < 0.08:
         _, pw = generate_mockery()
         return pw
 
@@ -160,28 +189,71 @@ def generate_password():
                 "123456ab",
                 "11223344",
                 "000000",
+                "aaaaaa",
+                "qwerty",
             ]
         )
 
-    # 2. 姓名/拼音/英文 + 数字/符号 (30%) - 丰富组合
-    elif rand < 0.40:
+    # 2. 姓名/拼音/英文 + 数字/符号 (35%) - 丰富组合
+    elif rand < 0.45:
         prefixes = [
-            "zhang", "li", "wang", "chen", "liu", "love", "smile", "lucky", "hello", 
-            "china", "iphone", "wechat", "sun", "yang", "zhao", "zhou", "beauty", 
-            "star", "cool", "super", "king", "queen", "happy", "money"
+            "zhang",
+            "li",
+            "wang",
+            "chen",
+            "liu",
+            "love",
+            "smile",
+            "lucky",
+            "hello",
+            "china",
+            "iphone",
+            "wechat",
+            "sun",
+            "yang",
+            "zhao",
+            "zhou",
+            "beauty",
+            "star",
+            "cool",
+            "super",
+            "king",
+            "queen",
+            "happy",
+            "money",
+            "dream",
+            "success",
         ]
         if random.random() > 0.5:
             prefixes = [p.capitalize() for p in prefixes]
-        
-        # 更多样化的后缀
+
         suffix = random.choice(
-            ["1990", "520", "123", "666", "888", "2024", "1314", "123456", "!@#", 
-             ".123", "_888", "001", "777", "999", "521", "2023", "111", "qwer"]
+            [
+                "1990",
+                "520",
+                "123",
+                "666",
+                "888",
+                "2024",
+                "1314",
+                "123456",
+                "!@#",
+                ".123",
+                "_888",
+                "001",
+                "777",
+                "999",
+                "521",
+                "2023",
+                "111",
+                "qwer",
+                "asdf",
+            ]
         )
         return random.choice(prefixes) + suffix
 
     # 3. 姓名缩写 + 日期 (20%)
-    elif rand < 0.55:
+    elif rand < 0.65:
         initials = [
             "zw",
             "lh",
@@ -218,19 +290,17 @@ def generate_password():
         return random.choice(initials) + random.choice([year, md])
 
     # 4. 手机号/生日 (20%)
-    elif rand < 0.75:
+    elif rand < 0.85:
         if random.random() > 0.5:
-            # 模拟11位手机号
             return "1" + "".join(random.choices(string.digits, k=10))
         else:
-            # 模拟19901001格式生日
             year = str(random.randint(1980, 2010))
             month = str(random.randint(1, 12)).zfill(2)
             day = str(random.randint(1, 28)).zfill(2)
             return year + month + day
 
-    # 5. 键盘序列/纯字符 (15%)
-    elif rand < 0.90:
+    # 5. 键盘序列/纯字符 (10%)
+    elif rand < 0.95:
         return random.choice(
             [
                 "asdfghjkl",
@@ -240,13 +310,15 @@ def generate_password():
                 "p0o9i8u7",
                 "qwaszx",
                 "yuiop789",
+                "zxcv1234",
+                "123qweas",
             ]
         )
 
-    # 6. 混合复杂模式 (10%) - 提高后台可信度
+    # 6. 混合复杂模式 (5%)
     else:
         prefix = "".join(random.choices(string.ascii_letters, k=random.randint(2, 4)))
-        mid = random.choice(["@", ".", "_", ""])
+        mid = random.choice(["@", ".", "_", "#", "$", ""])
         num = "".join(random.choices(string.digits, k=random.randint(3, 6)))
         return prefix + mid + num
 
@@ -276,7 +348,6 @@ async def send_poison_request(client, data_type):
     }
 
     try:
-        # 发送前日志
         print(
             f"[{time.strftime('%H:%M:%S')}] 尝试注入 -> 类型: {data_type:6} | 账号: {account:12}",
             end=" ",
@@ -287,20 +358,16 @@ async def send_poison_request(client, data_type):
             TARGET_URL, data=payload, headers=headers, timeout=15.0
         )
 
-        # 显式 print 动作：发送后日志
         status_text = response.text.replace("\n", " ")
         print(f"| 状态: {response.status_code} | 返回: {status_text}")
 
-        # 反查验证逻辑
         try:
             res_json = response.json()
             if res_json.get("code") == 1 and "id" in res_json:
                 inj_id = res_json["id"]
-                # 构造反查 URL
                 base_url = TARGET_URL.split("?")[0]
                 query_url = f"{base_url}?act=getstate&id={inj_id}"
 
-                # 等待极短时间确保后台已入库
                 await asyncio.sleep(1)
 
                 check_res = await client.get(query_url, headers=headers, timeout=10.0)
