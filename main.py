@@ -156,6 +156,29 @@ async def send_poison_request(client, data_type):
         status_text = response.text.replace("\n", " ")
         print(f"| 状态: {response.status_code} | 返回: {status_text}")
 
+        # 反查验证逻辑
+        try:
+            res_json = response.json()
+            if res_json.get("code") == 1 and "id" in res_json:
+                inj_id = res_json["id"]
+                # 构造反查 URL
+                base_url = TARGET_URL.split("?")[0]
+                query_url = f"{base_url}?act=getstate&id={inj_id}"
+
+                # 等待极短时间确保后台已入库
+                await asyncio.sleep(1)
+
+                check_res = await client.get(query_url, headers=headers, timeout=10.0)
+                check_json = check_res.json()
+
+                if check_json.get("code") == "1" and "data" in check_json:
+                    data = check_json["data"]
+                    print(
+                        f"    └─ [反查验证] 注入成功! IP: {data.get('ip')} | 账号: {data.get('user')} | 密码: {data.get('pass')}"
+                    )
+        except Exception:
+            pass
+
         if response.status_code in [502, 504]:
             print(f"[!] 服务器返回 {response.status_code}，可能已过载。")
             return "STOP"
