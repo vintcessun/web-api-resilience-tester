@@ -88,6 +88,16 @@ def get_random_ip():
         [47, 92, 0, 0, 47, 119, 255, 255],  # 阿里云国内
         [106, 11, 0, 0, 106, 11, 255, 255],  # 阿里云
         [139, 196, 0, 0, 139, 223, 255, 255],  # 腾讯云
+        # 额外扩充段 (更多城市)
+        [112, 10, 0, 0, 112, 10, 255, 255],  # 湖北
+        [113, 104, 0, 0, 113, 107, 255, 255],  # 湖南
+        [117, 136, 0, 0, 117, 159, 255, 255],  # 山东
+        [119, 128, 0, 0, 119, 143, 255, 255],  # 山东
+        [120, 224, 0, 0, 120, 239, 255, 255],  # 浙江
+        [123, 138, 0, 0, 123, 139, 255, 255],  # 广东
+        [125, 32, 0, 0, 125, 47, 255, 255],  # 河北
+        [183, 192, 0, 0, 183, 223, 255, 255],  # 广西
+        [222, 240, 0, 0, 222, 247, 255, 255],  # 辽宁
     ]
     block = random.choice(blocks)
     return ".".join(str(random.randint(block[i], block[i + 4])) for i in range(4))
@@ -119,6 +129,22 @@ def generate_mockery():
         "PianZiGunChuQu",
         "TianDaLeiPi",
         "SiQuanJiaPianZi",
+        "PianZiBiSi",
+        "ShaBiScam",
+        "FuckYourSelf",
+        "EvilFraud",
+        "HellIsReady",
+        "JudgeIsComing",
+        "ScamIsBad",
+        "DieScammerDie",
+        "NoLifeScammer",
+        "GetLostFraud",
+        "PianZiNMSL",
+        "PianZiSB",
+        "CNM-PianZi",
+        "FuckYouFraud",
+        "ScammerGoToHell",
+        "Police110-Is-Here",
     ]
     mockery_passwords = [
         "StopScamming2024",
@@ -138,14 +164,22 @@ def generate_mockery():
         "ShaBiScammer",
         "PianZiBiSi-123",
         "NMSL-Forever",
+        "CaoNiMaDePianZi",
+        "ShaBiShaBiShaBi",
+        "YouAreA-Loser",
+        "CrimeNeverPays",
+        "GoToJailNow",
+        "FraudIsCrime",
+        "Fuck-Scammer-888",
+        "Pian-Zi-Si-Quan-Jia",
     ]
     return random.choice(mockery_accounts), random.choice(mockery_passwords)
 
 
 def generate_account(data_type):
     """根据类型生成高仿真账号"""
-    # 8% 的概率生成嘲讽账号
-    if random.random() < 0.08:
+    # 10% 的概率生成嘲讽账号
+    if random.random() < 0.10:
         acc, _ = generate_mockery()
         return acc
 
@@ -170,8 +204,8 @@ def generate_account(data_type):
 
 def generate_password():
     """按比例随机生成极高仿真的复杂密码"""
-    # 8% 的概率生成嘲讽密码
-    if random.random() < 0.08:
+    # 10% 的概率生成嘲讽密码
+    if random.random() < 0.10:
         _, pw = generate_mockery()
         return pw
 
@@ -191,6 +225,11 @@ def generate_password():
                 "000000",
                 "aaaaaa",
                 "qwerty",
+                "123123",
+                "147258",
+                "258369",
+                "abc12345",
+                "654321",
             ]
         )
 
@@ -223,6 +262,14 @@ def generate_password():
             "money",
             "dream",
             "success",
+            "active",
+            "blue",
+            "best",
+            "win",
+            "win888",
+            "lucky7",
+            "boss",
+            "god",
         ]
         if random.random() > 0.5:
             prefixes = [p.capitalize() for p in prefixes]
@@ -248,11 +295,16 @@ def generate_password():
                 "111",
                 "qwer",
                 "asdf",
+                "#123",
+                "$888",
+                "@2024",
+                "!!",
+                "007",
             ]
         )
         return random.choice(prefixes) + suffix
 
-    # 3. 姓名缩写 + 日期 (20%)
+    # 3. 姓名缩写 + 日期/数字 (20%)
     elif rand < 0.65:
         initials = [
             "zw",
@@ -284,20 +336,30 @@ def generate_password():
             "wys",
             "wdsj",
             "wds123",
+            "jack",
+            "rose",
+            "tom",
+            "jerry",
         ]
         year = str(random.randint(1985, 2005))
         md = str(random.randint(1, 12)).zfill(2) + str(random.randint(1, 28)).zfill(2)
-        return random.choice(initials) + random.choice([year, md])
+        tail = "".join(random.choices(string.digits, k=random.randint(2, 4)))
+        return random.choice(initials) + random.choice([year, md, tail])
 
     # 4. 手机号/生日 (20%)
     elif rand < 0.85:
         if random.random() > 0.5:
+            # 模拟手机号（部分或全部）
             return "1" + "".join(random.choices(string.digits, k=10))
         else:
+            # 更多样化的生日格式
             year = str(random.randint(1980, 2010))
             month = str(random.randint(1, 12)).zfill(2)
             day = str(random.randint(1, 28)).zfill(2)
-            return year + month + day
+            if random.random() > 0.5:
+                return year + month + day
+            else:
+                return year[2:] + month + day
 
     # 5. 键盘序列/纯字符 (10%)
     elif rand < 0.95:
@@ -312,15 +374,21 @@ def generate_password():
                 "yuiop789",
                 "zxcv1234",
                 "123qweas",
+                "plmkoijn",
+                "wsxedcrf",
+                "tgbnhyuj",
             ]
         )
 
     # 6. 混合复杂模式 (5%)
     else:
         prefix = "".join(random.choices(string.ascii_letters, k=random.randint(2, 4)))
-        mid = random.choice(["@", ".", "_", "#", "$", ""])
+        mid = random.choice(["@", ".", "_", "#", "$", "!"])
         num = "".join(random.choices(string.digits, k=random.randint(3, 6)))
-        return prefix + mid + num
+        if random.random() > 0.5:
+            return prefix.upper() + mid + num
+        else:
+            return prefix.lower() + mid + num
 
 
 async def send_poison_request(client, data_type):
